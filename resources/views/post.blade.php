@@ -4,13 +4,13 @@
 
 @section('content')
 <!-- Page Header-->
-<header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+<header class="masthead" style="background-image: url({{asset('assets/img/post-bg.jpg')}})">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="post-heading">
-                    <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
-                    <h2 class="subheading">Maecenas nunc orci, volutpat ac ipsum ultricies, aliquet fermentum orci. Sed suscipit dui massa.</h2>
+                    <h1>{{$post->title}}</h1>
+                    <h2 class="subheading">{{$post->excerpt}}</h2>
                     <span class="meta">
                                 Wysłane przez
                                 <a href="#!">autor</a>
@@ -26,7 +26,7 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit lectus sit amet risus accumsan, et bibendum nibh dignissim. Curabitur sit amet sagittis augue. Nullam molestie sed dolor eu hendrerit. Aliquam erat volutpat. Fusce placerat tellus tellus, et finibus elit bibendum ac. Quisque venenatis nibh molestie ex mollis porttitor. Nulla risus augue, commodo et suscipit sit amet, pharetra ut mauris. Donec dapibus elementum nibh, eu consequat est congue et. Aenean et arcu laoreet, gravida leo ac, feugiat risus. Nulla tristique nulla eu diam tincidunt tincidunt. Praesent euismod a nisi eget malesuada. In rhoncus aliquam quam, sit amet lobortis est iaculis vitae. Sed fermentum tristique lobortis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit lectus sit amet risus accumsan, et bibendum nibh dignissim. Curabitur sit amet sagittis augue. Nullam molestie sed dolor eu hendrerit. Aliquam erat volutpat. Fusce placerat tellus tellus, et finibus elit bibendum ac. Quisque venenatis nibh molestie ex mollis porttitor. Nulla risus augue, commodo et suscipit sit amet, pharetra ut mauris. Donec dapibus elementum nibh, eu consequat est congue et. Aenean et arcu laoreet, gravida leo ac, feugiat risus. Nulla tristique nulla eu diam tincidunt tincidunt. Praesent euismod a nisi eget malesuada. In rhoncus aliquam quam, sit amet lobortis est iaculis vitae. Sed fermentum tristique lobortis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit lectus sit amet risus accumsan, et bibendum nibh dignissim. Curabitur sit amet sagittis augue. Nullam molestie sed dolor eu hendrerit. Aliquam erat volutpat. Fusce placerat tellus tellus, et finibus elit bibendum ac. Quisque venenatis nibh molestie ex mollis porttitor. Nulla risus augue, commodo et suscipit sit amet, pharetra ut mauris. Donec dapibus elementum nibh, eu consequat est congue et. Aenean et arcu laoreet, gravida leo ac, feugiat risus. Nulla tristique nulla eu diam tincidunt tincidunt. Praesent euismod a nisi eget malesuada. In rhoncus aliquam quam, sit amet lobortis est iaculis vitae. Sed fermentum tristique lobortis.</p>
+                <p class="text-justify">{{$post->body}}</p>
                 <hr class="my-4" />
                 <div class="d-flex flex-column comment-section">
                     <div class="bg-white p-2">

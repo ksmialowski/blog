@@ -36,14 +36,15 @@
                 </div>
             </div>
             <!-- Post preview-->
+            @foreach ($posts as $post)
             <div class="post-preview">
                 <div class="row">
                     <div class="col-4">
                         <img src="assets/img/placeholder.png" class="img-fluid">
                     </div>
                     <div class="col-8">
-                        <a href="#"><h2 class="post-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-                            <h3 class="post-subtitle">Maecenas nunc orci, volutpat ac ipsum ultricies, aliquet fermentum orci. Sed suscipit dui massa.</h3></a>
+                        <a href="/posts/{{ $post->slug }}"><h2 class="post-title">{{$post->title}}</h2>
+                            <h3 class="post-subtitle">{{ $post->excerpt }}</h3></a>
                     </div>
                     <p class="post-meta">
                         Wysłane przez
@@ -55,6 +56,7 @@
             <!-- Divider-->
             <hr class="my-4" />
             <!-- Post preview-->
+            @endforeach
             <div class="post-preview">
                 <div class="row">
                     <div class="col-4">
