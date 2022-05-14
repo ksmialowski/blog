@@ -47,9 +47,9 @@
                             <h3 class="post-subtitle">{{ $post->excerpt }}</h3></a>
                     </div>
                     <p class="post-meta">
-                        Wysłane przez
-                        <a href="#!">autor</a>
-                        w dniu 12 maja 2022
+                        Opublikowane przez
+                        <a href="#!">{{ $post->author->name }}</a>
+                        w dniu {{ $post->created_at->format('d.m.Y') }}
                     </p>
                 </div>
             </div>

@@ -12,10 +12,8 @@
                     <h1>{{$post->title}}</h1>
                     <h2 class="subheading">{{$post->excerpt}}</h2>
                     <span class="meta">
-                                Wysłane przez
-                                <a href="#!">autor</a>
-                                w dniu 12 maja 2022
-                            </span>
+                        {{ $post->created_at->diffForHumans() }}
+                    </span>
                 </div>
             </div>
         </div>
