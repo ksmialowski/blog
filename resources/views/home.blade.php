@@ -21,18 +21,46 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
+            <form method="GET" action="/">
             <div class="mb-5">
+                @php
+
+                @endphp
                 <div class="input-group rounded">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Kategorie</option>
-                        <option value="1">X</option>
-                        <option value="2">Y</option>
-                        <option value="3">Z</option>
-                    </select>
-                    <input type="search" class="form-control rounded" placeholder="Szukaj" aria-label="Search" aria-describedby="search-addon" />
-                    <span class="input-group-text border-0" id="search-addon">
-                                <i class="fas fa-search"></i>
-                            </span>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Kategorie' }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                            <li><a class="dropdown-item" href="/?{{ http_build_query(request()->except('category')) }}"
+                                   :active="request()->routeIs('home') && is_null(request()->getQueryString())">Wszystkie</a></li>
+
+                            @foreach ($categories as $category)
+                                <li><a class="dropdown-item {{isset($currentCategory) && $currentCategory->is($category) ? 'active' : ''}}" href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category', 'page')) }}"
+                                       :active='request()->fullUrlIs("*?category={$category->slug}*")'
+                                    >
+                                        {{ ucwords($category->name) }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                        @if (request('category'))
+                            <input type="hidden" name="category" value="{{ request('category') }}">
+                        @endif
+
+                        <input type="text"
+                               name="search"
+                               placeholder="Szukaj"
+                               class="form-control rounded"
+                               value="{{ request('search') }}"
+                               aria-label="Search"
+                               aria-describedby="search-addon"
+                        >
+                        <button class="input-group-text border-0" id="search-addon">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
             <!-- Post preview-->
@@ -41,6 +69,7 @@
                 <div class="row">
                     <div class="col-4">
                         <img src="assets/img/placeholder.png" class="img-fluid">
+                        <h4 class="post-subtitle">Kategoria: <a href="/?category={{ $post->category->slug }}">{{ $post->category->name }}</a></h4>
                     </div>
                     <div class="col-8">
                         <a href="/posts/{{ $post->slug }}"><h2 class="post-title">{{$post->title}}</h2>
@@ -48,71 +77,14 @@
                     </div>
                     <p class="post-meta">
                         Opublikowane przez
-                        <a href="#!">{{ $post->author->name }}</a>
+                        <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
                         w dniu {{ $post->created_at->format('d.m.Y') }}
                     </p>
                 </div>
             </div>
             <!-- Divider-->
             <hr class="my-4" />
-            <!-- Post preview-->
             @endforeach
-            <div class="post-preview">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="assets/img/placeholder.png" class="img-fluid">
-                    </div>
-                    <div class="col-8">
-                        <a href="#"><h2 class="post-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-                            <h3 class="post-subtitle">Maecenas nunc orci, volutpat ac ipsum ultricies, aliquet fermentum orci. Sed suscipit dui massa.</h3></a>
-                    </div>
-                    <p class="post-meta">
-                        Wysłane przez
-                        <a href="#!">autor</a>
-                        w dniu 12 maja 2022
-                    </p>
-                </div>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="assets/img/placeholder.png" class="img-fluid">
-                    </div>
-                    <div class="col-8">
-                        <a href="#"><h2 class="post-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-                            <h3 class="post-subtitle">Maecenas nunc orci, volutpat ac ipsum ultricies, aliquet fermentum orci. Sed suscipit dui massa.</h3></a>
-                    </div>
-                    <p class="post-meta">
-                        Wysłane przez
-                        <a href="#!">autor</a>
-                        w dniu 12 maja 2022
-                    </p>
-                </div>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="assets/img/placeholder.png" class="img-fluid">
-                    </div>
-                    <div class="col-8">
-                        <a href="#"><h2 class="post-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
-                            <h3 class="post-subtitle">Maecenas nunc orci, volutpat ac ipsum ultricies, aliquet fermentum orci. Sed suscipit dui massa.</h3></a>
-                    </div>
-                    <p class="post-meta">
-                        Wysłane przez
-                        <a href="#!">autor</a>
-                        w dniu 12 maja 2022
-                    </p>
-                </div>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
             <!-- Pager-->
             <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Starsze posty →</a></div>
         </div>
