@@ -33,7 +33,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-                            <li><a class="dropdown-item" href="/?{{ http_build_query(request()->except('category')) }}"
+                            <li><a class="dropdown-item" href="/?{{ http_build_query(request()->except('category','page')) }}"
                                    :active="request()->routeIs('home') && is_null(request()->getQueryString())">Wszystkie</a></li>
 
                             @foreach ($categories as $category)
@@ -64,29 +64,33 @@
                 </div>
             </div>
             <!-- Post preview-->
-            @foreach ($posts as $post)
-            <div class="post-preview">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="assets/img/placeholder.png" class="img-fluid">
-                        <h4 class="post-subtitle">Kategoria: <a href="/?category={{ $post->category->slug }}">{{ $post->category->name }}</a></h4>
+            @if ($posts->count())
+                @foreach ($posts as $post)
+                    <div class="post-preview">
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="assets/img/placeholder.png" class="img-fluid">
+                                <span class="badge rounded-pill bg-light mt-3"><a href="/?category={{ $post->category->slug }}">{{ $post->category->name }}</a></span>
+                            </div>
+                            <div class="col-8">
+                                <a href="/posts/{{ $post->slug }}"><h2 class="post-title">{{$post->title}}</h2>
+                                    <h3 class="post-subtitle">{{ $post->excerpt }}</h3></a>
+                            </div>
+                            <p class="post-meta">
+                                Opublikowane przez
+                                <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
+                                w dniu {{ $post->created_at->format('d.m.Y') }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="col-8">
-                        <a href="/posts/{{ $post->slug }}"><h2 class="post-title">{{$post->title}}</h2>
-                            <h3 class="post-subtitle">{{ $post->excerpt }}</h3></a>
-                    </div>
-                    <p class="post-meta">
-                        Opublikowane przez
-                        <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
-                        w dniu {{ $post->created_at->format('d.m.Y') }}
-                    </p>
-                </div>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            @endforeach
-            <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Starsze posty →</a></div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                @endforeach
+                <!-- Pager-->
+                <div class="d-flex justify-content-center mb-4">{{ $posts->links() }}</div>
+            @else
+                <p class="post-meta text-center">Niestety, nie ma jeszcze postów.</p>
+            @endif
         </div>
     </div>
 </div>
