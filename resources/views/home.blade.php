@@ -23,9 +23,6 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
             <form method="GET" action="/">
             <div class="mb-5">
-                @php
-
-                @endphp
                 <div class="input-group rounded">
                     <div class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
