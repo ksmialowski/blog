@@ -241,6 +241,7 @@ a {
 }
 a:hover {
   color: #0085A1;
+  cursor:pointer;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {

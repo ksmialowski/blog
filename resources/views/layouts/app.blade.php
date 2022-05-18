@@ -23,10 +23,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Dodaj post</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Witaj, Imię</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Wyloguj się</a></li>
+                @auth
+    {{--                @admin--}}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Dodaj post</a></li>
+    {{--                @endadmin--}}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Witaj, {{ auth()->user()->name }}</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" onclick="document.getElementById('logoutForm').submit();">Wyloguj się</a></li>
+                @else
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Zaloguj się</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/register">Zarejestruj się</a></li>
+                @endauth
             </ul>
+            <form id="logoutForm" method="POST" action="/logout">
+                @csrf
+            </form>
         </div>
     </div>
 </nav>
