@@ -50,7 +50,7 @@
                             @csrf
                             <div class="bg-light p-4">
                                 <div class="d-flex flex-row align-items-start">
-                                    <img class="rounded-circle m-2" src="{{ asset('assets/img/avatar.jpg') }}" width="40">
+                                    <img class="rounded-circle m-2" src="{{ asset('storage/' . auth()->user()->avatar) }}" width="40">
                                     <textarea style="resize: none;" name="body" placeholder="Napisz coś..." class="form-control ml-1 shadow-none textarea" id="commentOutput" required></textarea>
                                 </div>
                                 <div class="mt-4 text-right">

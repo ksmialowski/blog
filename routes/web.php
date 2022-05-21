@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,10 @@ Route::post('register', [RegisterController::class, 'store']);
 Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
 Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+//Avatar of User
+Route::get('profile', [UserController::class, 'edit'])->middleware('auth');
+Route::patch('profile/{user:username}', [UserController::class, 'update'])->middleware('auth');
 
 //Admin Panel
 Route::middleware('admin')->group(function () {

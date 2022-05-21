@@ -27,7 +27,7 @@
                     @if (Auth::user()->isAdmin)
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/admin/posts">Panel admina</a></li>
                     @endif
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Witaj, {{ auth()->user()->name }}</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ auth()->user()->username}}/avatar">Witaj, {{ auth()->user()->name }}</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" onclick="document.getElementById('logoutForm').submit();">Wyloguj się</a></li>
                 @else
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Zaloguj się</a></li>
