@@ -33,7 +33,11 @@
                     @foreach($post->comments as $comment)
                         <div class="bg-white p-2">
                             <div class="d-flex flex-row user-info py-2">
-                                <img class="rounded-circle" src="{{ asset('assets/img/avatar.jpg') }}">
+                                @if(!is_null( auth()->user()->avatar))
+                                    <img class="rounded-circle" src="{{ asset('storage/' . auth()->user()->avatar) }}" width="100">
+                                @else
+                                    <img class="rounded-circle" src="{{ asset('assets/img/avatar.jpg') }}" width="100">
+                                @endif
                                 <div class="d-flex flex-column justify-content-center p-2">
                                     <span class="d-block font-weight-bold name">{{ $comment->author->name }}</span>
                                     <span class="date text-black-50 small">{{ $comment->created_at->format('j F Y, H:i') }}</span>
@@ -50,7 +54,11 @@
                             @csrf
                             <div class="bg-light p-4">
                                 <div class="d-flex flex-row align-items-start">
-                                    <img class="rounded-circle m-2" src="{{ asset('storage/' . auth()->user()->avatar) }}" width="40">
+                                    @if(!is_null( auth()->user()->avatar))
+                                        <img class="rounded-circle m-2" src="{{ asset('storage/' . auth()->user()->avatar) }}" width="100">
+                                    @else
+                                        <img class="rounded-circle m-2" src="{{ asset('assets/img/avatar.jpg') }}" width="100">
+                                    @endif
                                     <textarea style="resize: none;" name="body" placeholder="Napisz coś..." class="form-control ml-1 shadow-none textarea" id="commentOutput" required></textarea>
                                 </div>
                                 <div class="mt-4 text-right">

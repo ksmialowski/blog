@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class AdminPostController extends Controller
 {
@@ -31,7 +32,7 @@ class AdminPostController extends Controller
             'thumbnail' => request()->file('thumbnail')->store('thumbnails')
         ]));
 
-        return redirect('/admin/posts')->with('success','Post dodany');
+        return redirect('/admin/posts')->with('success', 'Post dodany');
     }
 
     public function edit(Post $post)
@@ -47,10 +48,12 @@ class AdminPostController extends Controller
         $attributes = $this->validatePost($post);
 
         if ($attributes['image'] ?? false) {
+            $this->deleteImage($post->image);
             $attributes['image'] = request()->file('image')->store('images');
         }
 
         if ($attributes['thumbnail'] ?? false) {
+            $this->deleteImage($post->thumbnail);
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
 
@@ -61,6 +64,8 @@ class AdminPostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->deleteImage($post->image);
+        $this->deleteImage($post->thumbnail);
         $post->delete();
 
         return back()->with('success', 'Post usunięty!');
@@ -76,9 +81,16 @@ class AdminPostController extends Controller
             'thumbnail' => $post->exists ? ['image'] : ['required', 'image'],
             'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post)],
             'excerpt' => 'required',
-            'published' => ['boolean','required'],
+            'published' => ['boolean', 'required'],
             'body' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id')]
         ]);
+    }
+
+    public function deleteImage($image)
+    {
+        if (Storage::exists($image)) {
+            Storage::delete($image);
+        }
     }
 }
