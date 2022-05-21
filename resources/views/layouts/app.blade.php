@@ -24,9 +24,9 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 @auth
-    {{--                @admin--}}
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Dodaj post</a></li>
-    {{--                @endadmin--}}
+                    @if (Auth::user()->isAdmin)
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/admin/posts">Panel admina</a></li>
+                    @endif
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Witaj, {{ auth()->user()->name }}</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" onclick="document.getElementById('logoutForm').submit();">Wyloguj się</a></li>
                 @else

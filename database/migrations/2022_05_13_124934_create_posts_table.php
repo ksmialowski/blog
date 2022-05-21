@@ -19,11 +19,12 @@ class CreatePostsTable extends Migration
             $table->foreignId('category_id');
             $table->string('slug')->unique();
             $table->string('title');
-            $table->string('image')->nullable();
+            $table->string('image')->default('images/post-bg.jpg');
+            $table->string('thumbnail')->default('thumbnails/placeholder.png');
             $table->text('excerpt');
             $table->text('body');
             $table->timestamps();
-            $table->timestamp('published_at')->nullable();
+            $table->boolean('published')->default(1);
         });
     }
 

@@ -17,7 +17,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $user = User::factory()->create([
-            'name' => 'Kamil Śmiałowski'
+            'name' => 'Test',
+            'username' => 'Test',
+            'email' => 'test@test.com',
+            'email_verified_at' => date('Y-m-d H:i:s'),
+            'password' => "test",
+            'isAdmin' => 1,
+            'remember_token' => '',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+
         ]);
 
         $post = Post::factory(10)->create();
