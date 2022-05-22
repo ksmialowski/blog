@@ -21,45 +21,31 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            <form method="GET" action="/">
-            <div class="mb-5">
-                <div class="input-group rounded">
-                    <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Kategorie' }}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                            <li><a class="dropdown-item" href="/?{{ http_build_query(request()->except('category','page')) }}"
-                                   :active="request()->routeIs('home') && is_null(request()->getQueryString())">Wszystkie</a></li>
-
-                            @foreach ($categories as $category)
-                                <li><a class="dropdown-item {{isset($currentCategory) && $currentCategory->is($category) ? 'active' : ''}}" href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category', 'page')) }}"
-                                       :active='request()->fullUrlIs("*?category={$category->slug}*")'
-                                    >
-                                        {{ ucwords($category->name) }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-
+            <form method="GET" action="/" class="mb-5">
+                    <div class="input-group rounded">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Kategorie' }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="/?{{ http_build_query(request()->except('category','page')) }}"
+                                       :active="request()->routeIs('home') && is_null(request()->getQueryString())">Wszystkie</a></li>
+                                @foreach ($categories as $category)
+                                    <li><a class="dropdown-item {{isset($currentCategory) && $currentCategory->is($category) ? 'active' : ''}}" href="/?category={{ $category->slug }}&{{ http_build_query(request()->except('category', 'page')) }}"
+                                           :active='request()->fullUrlIs("*?category={$category->slug}*")'>
+                                            {{ ucwords($category->name) }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
                         @if (request('category'))
                             <input type="hidden" name="category" value="{{ request('category') }}">
                         @endif
-
-                        <input type="text"
-                               name="search"
-                               placeholder="Szukaj"
-                               class="form-control rounded"
-                               value="{{ request('search') }}"
-                               aria-label="Search"
-                               aria-describedby="search-addon"
-                        >
+                        <input type="text" name="search" placeholder="Szukaj" class="form-control rounded" value="{{ request('search') }}" aria-label="Search" aria-describedby="search-addon">
                         <button class="input-group-text border-0" id="search-addon">
                             <i class="fas fa-search"></i>
                         </button>
-                    </form>
-                </div>
-            </div>
+                    </div>
+            </form>
             <!-- Post preview-->
             @if ($posts->count())
                 @foreach ($posts as $post)

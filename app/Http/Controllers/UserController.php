@@ -12,7 +12,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        return view('user.index', compact('user'));
+        return view('user.edit', compact('user'));
     }
 
     public function update(User $user)

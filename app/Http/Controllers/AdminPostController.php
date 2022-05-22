@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;

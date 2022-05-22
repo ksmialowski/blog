@@ -11,9 +11,7 @@
                 <div class="post-heading">
                     <h1>{{ $post->title }}</h1>
                     <h2 class="subheading">{{ $post->excerpt }}</h2>
-                    <span class="meta">
-                        {{ $post->created_at->diffForHumans() }}
-                    </span>
+                    <span class="meta">{{ $post->created_at->diffForHumans() }}</span>
                 </div>
             </div>
         </div>
@@ -27,7 +25,7 @@
                 <p class="text-justify">{{ $post->body }}</p>
                 <p class="text-justify">Napisane przez: <a class="text-decoration-none" href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a></p>
                 <hr class="my-5" />
-{{--Comment Content--}}
+                {{--Comment Content--}}
                 <div class="d-flex flex-column comment-section">
                     <h4 class="pb-4 fw-normal">Komentarze</h4>
                     @foreach($post->comments as $comment)
