@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Panel admina')
+@section('title','Panel admina - ')
 
 @section('content')
 
@@ -32,12 +32,7 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img
-                                                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                                alt=""
-                                                style="width: 45px; height: 45px"
-                                                class="rounded-circle"
-                                            />
+                                            <img src="{{ $post->author->avatar ? asset('storage/'.$post->author->avatar) : asset('storage/avatars/default.jpg') }}" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>
                                             <div class="ms-3">
                                                 <p class="fw-bold mb-1">{{ $post->author->name }}</p>
                                                 <p class="text-muted m-0">{{ $post->author->email }}</p>

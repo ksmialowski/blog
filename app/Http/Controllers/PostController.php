@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
-use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
     public function index()
     {
-        return view('home', [
+        return view('posts.index', [
             'posts' => Post::where('published', 1)->latest()->filter(
                 request(['search', 'category', 'author'])
             )->paginate(5)->withQueryString(),
@@ -23,7 +22,7 @@ class PostController extends Controller
     {
         abort_if($post->published != 1, 404);
 
-        return view('post', [
+        return view('posts.show', [
             'post' => $post
         ]);
     }

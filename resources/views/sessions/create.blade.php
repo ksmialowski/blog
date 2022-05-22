@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Logowanie')
+@section('title','Zaloguj się do ')
 
 @section('content')
     <header class="masthead" style="background-image: url({{asset('assets/img/login-bg.jpg')}})">

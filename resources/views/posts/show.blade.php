@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','post')
+@section('title',$post->title.' - ')
 
 @section('content')
 <!-- Page Header-->
@@ -25,7 +25,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <p class="text-justify">{{ $post->body }}</p>
-                <p class="text-justify">Napisane przez {{ $post->author->name }}</p>
+                <p class="text-justify">Napisane przez: <a class="text-decoration-none" href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a></p>
                 <hr class="my-5" />
 {{--Comment Content--}}
                 <div class="d-flex flex-column comment-section">
@@ -33,11 +33,7 @@
                     @foreach($post->comments as $comment)
                         <div class="bg-white p-2">
                             <div class="d-flex flex-row user-info py-2">
-                                @if(!is_null( auth()->user()->avatar))
-                                    <img class="rounded-circle" src="{{ asset('storage/' . auth()->user()->avatar) }}" width="100">
-                                @else
-                                    <img class="rounded-circle" src="{{ asset('assets/img/avatar.jpg') }}" width="100">
-                                @endif
+                                <img class="rounded-circle" src="{{ $comment->author->avatar ? asset('storage/'.$comment->author->avatar) : asset('storage/avatars/default.jpg') }}" width="100">
                                 <div class="d-flex flex-column justify-content-center p-2">
                                     <span class="d-block font-weight-bold name">{{ $comment->author->name }}</span>
                                     <span class="date text-black-50 small">{{ $comment->created_at->format('j F Y, H:i') }}</span>
@@ -54,11 +50,7 @@
                             @csrf
                             <div class="bg-light p-4">
                                 <div class="d-flex flex-row align-items-start">
-                                    @if(!is_null( auth()->user()->avatar))
-                                        <img class="rounded-circle m-2" src="{{ asset('storage/' . auth()->user()->avatar) }}" width="100">
-                                    @else
-                                        <img class="rounded-circle m-2" src="{{ asset('assets/img/avatar.jpg') }}" width="100">
-                                    @endif
+                                    <img class="rounded-circle m-2" src="{{ auth()->user()->avatar ? asset('storage/'.auth()->user()->avatar) : asset('storage/avatars/default.jpg') }}" width="100">
                                     <textarea style="resize: none;" name="body" placeholder="Napisz coś..." class="form-control ml-1 shadow-none textarea" id="commentOutput" required></textarea>
                                 </div>
                                 <div class="mt-4 text-right">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Edytuj post')
+@section('title','Edytuj post - ')
 
 @section('content')
 
@@ -103,9 +103,7 @@
                     <!-- Body input -->
                     <div class="form-outline mb-2">
                         <label class="form-label">Opis</label>
-                        <textarea style="resize: none;" name="body" class="form-control ml-1 shadow-none textarea" rows="10" >
-                            {{ old('body', $post->body) }}
-                        </textarea>
+                        <textarea style="resize: none;" name="body" class="form-control ml-1 shadow-none textarea" rows="10">{{old('body', $post->body)}}</textarea>
                         @error('body')
                         <div class="alert alert-danger small mt-3" role="alert">
                             {{ $message }}

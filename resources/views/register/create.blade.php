@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Rejestracja')
+@section('title','Zarejestruj się do ')
 
 @section('content')
 

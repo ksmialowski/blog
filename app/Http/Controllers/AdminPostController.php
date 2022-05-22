@@ -13,7 +13,7 @@ class AdminPostController extends Controller
     public function index()
     {
         return view('admin.posts.index', [
-            'posts' => Post::orderBy('id', 'desc')->paginate(8),
+            'posts' => Post::latest()->paginate(8),
         ]);
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','strona główna')
+@section('title','')
 
 
 @section('content')
@@ -66,7 +66,7 @@
                     <div class="post-preview">
                         <div class="row">
                             <div class="col-4">
-                                <img src="{{ asset('storage/' . $post->thumbnail) }}" class="img-fluid">
+                                <img src="{{ $post->thumbnail ? asset('storage/'.$post->thumbnail) : asset('storage/thumbnails/default.jpg') }}" class="img-fluid">
                                 <span class="badge rounded-pill bg-light mt-3"><a href="/?category={{ $post->category->slug }}">{{ $post->category->name }}</a></span>
                             </div>
                             <div class="col-8">
